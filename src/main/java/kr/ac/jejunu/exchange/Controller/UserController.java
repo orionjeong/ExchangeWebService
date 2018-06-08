@@ -26,7 +26,7 @@ public class UserController {
     public List<User> list(){
         return userRepository.findAll();
     }
-    //Todo 등록 성공 실패 여부 리턴 필요
+    //Todo 등록 성공 실패 여부 리턴 필요 설계여부에 따라 리턴값 달라질 수 있음
     @PostMapping
     public User create(@RequestBody User user){
         return userRepository.save(user);

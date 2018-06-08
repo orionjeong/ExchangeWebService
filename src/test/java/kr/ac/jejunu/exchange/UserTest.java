@@ -26,15 +26,13 @@ public class UserTest {
 
     @Test
     public void get(){
-
-        User user = new User();
-        user.setUserId("user2");
-        user.setName("aaa");
-        user.setPassword("aaaa");
-        user.setEmail("user@daum.net");
-        user.setPhone("010-0000-0000");
-
-        validate( user);
+        String userId = "user2";
+        String name = "aaa";
+        String password = "aaaa";
+        String email = "user@daum.net";
+        String phone = "010-0000-0000";
+        User user = restTemplate.getForObject(PATH + "/" + userId, User.class);
+        validate(userId,name ,password ,email ,phone, user);
     }
 
     @Test
@@ -45,25 +43,37 @@ public class UserTest {
 
     @Test
     public void create(){
-        String userId  = "user2";
-        User createUser = createUser(userId);
-        validate(createUser);
+        String userId  = "user3";
+        String name = "aaa";
+        String password = "aaaa";
+        String email = "user@daum.net";
+        String phone = "010-0000-0000";
+        User createUser = createUser(userId, name, password, email, phone);
+        validate(userId,name ,password ,email ,phone, createUser);
     }
 
     @Test
     public void update(){
         String userId ="user5";
-        User createUser = createUser(userId);
+        String name = "aaa";
+        String password = "aaaa";
+        String email = "user@daum.net";
+        String phone = "010-0000-0000";
+        User createUser = createUser(userId, name, password, email, phone);
         createUser.setName("bbbbb");
         restTemplate.put(PATH, createUser);
-        validate(createUser);
+        validate(userId, "bbbbb", password, email, phone, createUser);
     }
 
     @Test
     public void delete(){
-        String userId = "user6";
-        User createUser = createUser(userId);
-        validate(createUser);
+        String userId = "user4";
+        String name = "aaa";
+        String password = "aaaa";
+        String email = "user@daum.net";
+        String phone = "010-0000-0000";
+        User createUser = createUser(userId, name, password, email, phone);
+        validate(userId, name, password, email, phone, createUser);
         restTemplate.delete(PATH+"/"+createUser.getUserId());
         User deleteUser = restTemplate.getForObject(PATH+"/"+createUser.getUserId(), User.class);
         assertThat(deleteUser.getUserId(), is(nullValue()));
@@ -72,21 +82,22 @@ public class UserTest {
 
     }
 
-    private void validate( User createdUser) {
+    private void validate(String userId, String name, String password, String email, String phone, User createdUser) {
         User resultUser = restTemplate.getForObject(PATH + "/" + createdUser.getUserId(), User.class);
-        assertThat(resultUser.getName(), is(createdUser.getName()));
-        assertThat(resultUser.getPassword(), is(createdUser.getPassword()));
-        assertThat(resultUser.getEmail(), is(createdUser.getEmail()));
-        assertThat(resultUser.getPhone(), is(createdUser.getPhone()));
+        assertThat(resultUser.getUserId(), is(userId));
+        assertThat(resultUser.getName(), is(name));
+        assertThat(resultUser.getPassword(), is(password));
+        assertThat(resultUser.getEmail(), is(email));
+        assertThat(resultUser.getPhone(), is(phone));
     }
 
-    private User createUser(String userId) {
+    private User createUser(String userId, String name, String password, String email, String phone) {
         User user = new User();
         user.setUserId(userId);
-        user.setName("aaa");
-        user.setPassword("aaaa");
-        user.setEmail("user@daum.net");
-        user.setPhone("010-0000-0000");
+        user.setName(name);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
         return restTemplate.postForObject(PATH, user, User.class);
     }
 }
