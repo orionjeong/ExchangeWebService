@@ -2,7 +2,6 @@ package kr.ac.jejunu.exchange.Controller;
 
 import kr.ac.jejunu.exchange.Model.Product;
 import kr.ac.jejunu.exchange.Repository.ProductRepository;
-import kr.ac.jejunu.exchange.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,32 +14,31 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    ProductRepository productRepository;
 
 
     @GetMapping(value = "/{id}")
     public Product get(@PathVariable Integer id){
-        return productService.get(id);
+        return  productRepository.findById(id).get();
     }
 
     @GetMapping(value = "/list")
     public List<Product> list(){
-        return productService.list();
-    }
+        return  productRepository.findAll();    }
 
     @PostMapping
     public Product create(@RequestBody Product product){
-        return productService.create( product);
+        return productRepository.save(product);
     }
 
     @PutMapping
     public void update(@RequestBody Product product){
-        productService.update(product);
+        productRepository.save(product);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id){
-        productService.delete(id);
+        productRepository.delete(productRepository.findById(id).get());
     }
 
 
