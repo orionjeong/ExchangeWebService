@@ -14,6 +14,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int commentId;
     String userId;
-    int prodcutId;
+    int productId;
     String contents;
 }

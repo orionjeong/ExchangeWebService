@@ -15,7 +15,7 @@ public class Basket {
     int basketId;
     String userId;
     int productId;
-    String contents;
+
 
 
 }

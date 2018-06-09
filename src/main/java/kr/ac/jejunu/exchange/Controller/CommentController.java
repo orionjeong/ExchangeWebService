@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/exchange")
+@RequestMapping("/api/comment")
 @RequiredArgsConstructor
-public class CommnetController {
+public class CommentController {
     @Autowired
     CommentRepository commentRepository;
 
@@ -39,7 +39,4 @@ public class CommnetController {
     public void delete(@PathVariable Integer id ){
         commentRepository.delete(commentRepository.findById(id).get());
     }
-
-    
-
 }

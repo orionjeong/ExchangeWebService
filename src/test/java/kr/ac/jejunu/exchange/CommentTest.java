@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -36,7 +37,7 @@ public class CommentTest {
 
         assertThat(comment.getCommentId(), is(commentId));
         assertThat(comment.getUserId(), is(userId));
-        assertThat(comment.getProdcutId(), is(productId));
+        assertThat(comment.getProductId(), is(productId));
         assertThat(comment.getContents(), is(comment));
     }
 
@@ -55,10 +56,34 @@ public class CommentTest {
         validate(userId, contents, productId, createComment);
     }
 
+    @Test
+    public void update(){
+        String userId = "user2";
+        Integer productId = 1;
+        String contents = "댓글입니다";
+        Comment createComment = createComment(userId, productId, contents);
+        validate(userId, contents, productId, createComment);
+        createComment.setContents("변경된댓글");
+        restTemplate.put(PATH, createComment);
+        validate(userId, "변경된댓글", productId, createComment);
+    }
+
+    @Test
+    public void delete(){
+        String userId = "user2";
+        Integer productId = 1;
+        String contents = "댓글입니다";
+        Comment createComment = createComment(userId, productId, contents);
+        validate(userId, contents, productId, createComment);
+        restTemplate.delete(PATH+"/"+ createComment.getCommentId());
+        Comment resultComment = restTemplate.getForObject(PATH+"/"+createComment.getCommentId(), Comment.class);
+        assertThat(resultComment.getContents(), is(nullValue()));
+    }
+
     private Comment createComment(String userId, Integer productId, String contents) {
         Comment comment = new Comment();
         comment.setUserId(userId);
-        comment.setProdcutId(productId);
+        comment.setProductId(productId);
         comment.setContents(contents);
         return restTemplate.postForObject(PATH,comment, Comment.class);
     }
@@ -67,7 +92,7 @@ public class CommentTest {
         Comment resultComment = restTemplate.getForObject(PATH+"/"+createComment.getCommentId(), Comment.class);
         assertThat(resultComment.getContents(), is(contents));
         assertThat(resultComment.getUserId(), is(userId));
-        assertThat(resultComment.getProdcutId(), is(productId));
+        assertThat(resultComment.getProductId(), is(productId));
     }
 
 
