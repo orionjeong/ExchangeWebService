@@ -14,33 +14,33 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    //Todo 추후 service로 로직 이동하는경우 같이 이동
     @Autowired
-    ProductRepository productRepository;
+    ProductService productService;
+
 
     @GetMapping(value = "/{id}")
     public Product get(@PathVariable Integer id){
-        return productRepository.findById(id).get();
+        return productService.get(id);
     }
 
     @GetMapping(value = "/list")
     public List<Product> list(){
-        return productRepository.findAll();
+        return productService.list();
     }
 
     @PostMapping
     public Product create(@RequestBody Product product){
-        return productRepository.save(product);
+        return productService.create( product);
     }
 
     @PutMapping
     public void update(@RequestBody Product product){
-        productRepository.save(product);
+        productService.update(product);
     }
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable int id){
-        productRepository.delete(productRepository.findById(id).get());
+        productService.delete(id);
     }
 
 
