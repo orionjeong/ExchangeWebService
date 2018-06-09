@@ -72,7 +72,6 @@ public class ThumbupTest {
 
         Thumbup deleteThumbup = restTemplate.getForObject(PATH+"/"+createThumbup.getThumbupId(),Thumbup.class);
         assertThat(deleteThumbup.getUserId(), is(nullValue()));
-
     }
 
     private Thumbup createThumbup(String userId, Integer productId) {

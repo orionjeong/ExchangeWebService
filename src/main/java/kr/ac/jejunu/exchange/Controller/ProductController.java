@@ -2,6 +2,7 @@ package kr.ac.jejunu.exchange.Controller;
 
 import kr.ac.jejunu.exchange.Model.Product;
 import kr.ac.jejunu.exchange.Repository.ProductRepository;
+import kr.ac.jejunu.exchange.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

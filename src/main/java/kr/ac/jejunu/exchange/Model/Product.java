@@ -12,16 +12,11 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int productId;
+    Integer productId;
     String title;
     String contents;
     String image;
-
-    @OneToMany
-    @JoinColumn(name = "productId", referencedColumnName = "productId")
-    List<Exchange> exchanges;
-
-
-
-
+    String category;
+    Integer views;
+    Integer likes;
 }
