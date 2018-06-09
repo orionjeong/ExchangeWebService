@@ -53,8 +53,8 @@ public class ProductTest {
         String contents = "product contents";
         String image = "경로";
         Product createProduct = createProduct(title, contents, image);
-        createProduct.setTitle("title변경");
         validate(title, contents, image, createProduct);
+        createProduct.setTitle("title변경");
         restTemplate.put(PATH, createProduct, User.class);
         validate("title변경", contents, image, createProduct);
     }
