@@ -18,7 +18,7 @@ public class Product {
     String image;
 
     @OneToMany
-    @JoinColumn(name = "product_id", referencedColumnName = "productId")
+    @JoinColumn(name = "productId", referencedColumnName = "productId")
     List<Exchange> exchanges;
 
 

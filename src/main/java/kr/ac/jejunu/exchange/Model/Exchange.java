@@ -13,13 +13,10 @@ import javax.persistence.*;
 public class Exchange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int exchange_id;
+    int exchangeId;
     String title;
     String contents;
     String image;
-    String user_id;
-    int product_id;
-
-
-
+    String userId;
+    int productId;
 }

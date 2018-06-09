@@ -18,7 +18,7 @@ public class ProductController {
     ProductRepository productRepository;
 
     @GetMapping(value = "/{id}")
-    public Product get(@PathVariable int id){
+    public Product get(@PathVariable Integer id){
         return productRepository.findById(id).get();
     }
 

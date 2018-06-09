@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class User {
     @Id
-    @Column(name="user_id",nullable=false)
+    @Column(name="userId",nullable=false)
     String userId;
     String name;
     String password;
