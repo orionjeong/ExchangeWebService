@@ -1,7 +1,7 @@
 package kr.ac.jejunu.exchange;
 
-import kr.ac.jejunu.exchange.Model.Product;
 import kr.ac.jejunu.exchange.Model.User;
+import kr.ac.jejunu.exchange.Model.Product;
 import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +34,7 @@ public class ProductTest {
         assertThat(product.getContents(), is(contents));
         assertThat(product.getImage(), is(image));
     }
+
     @Test
     public void list() {
         List<Product> products = restTemplate.getForObject(PATH + "/list", List.class);

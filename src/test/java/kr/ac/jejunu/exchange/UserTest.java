@@ -74,8 +74,8 @@ public class UserTest {
         String phone = "010-0000-0000";
         User createUser = createUser(userId, name, password, email, phone);
         validate(userId, name, password, email, phone, createUser);
-        restTemplate.delete(PATH+"/"+createUser.getUserId());
-        User deleteUser = restTemplate.getForObject(PATH+"/"+createUser.getUserId(), User.class);
+        restTemplate.delete(PATH+"/"+ createUser.getUserId());
+        User deleteUser = restTemplate.getForObject(PATH+"/"+ createUser.getUserId(), User.class);
         assertThat(deleteUser.getUserId(), is(nullValue()));
         assertThat(deleteUser.getName(), is(nullValue()));
 
@@ -91,9 +91,9 @@ public class UserTest {
         assertThat(resultUser.getPhone(), is(phone));
     }
 
-    private User createUser(String userId, String name, String password, String email, String phone) {
+    private User createUser(String username, String name, String password, String email, String phone) {
         User user = new User();
-        user.setUserId(userId);
+        user.setUsername(username);
         user.setName(name);
         user.setPassword(password);
         user.setEmail(email);
