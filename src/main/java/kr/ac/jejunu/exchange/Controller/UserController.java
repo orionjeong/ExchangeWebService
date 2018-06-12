@@ -1,9 +1,8 @@
 package kr.ac.jejunu.exchange.Controller;
 
-import kr.ac.jejunu.exchange.Repository.UserRepository;
 import kr.ac.jejunu.exchange.Model.User;
+import kr.ac.jejunu.exchange.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

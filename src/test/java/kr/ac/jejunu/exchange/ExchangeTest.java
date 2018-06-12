@@ -1,7 +1,6 @@
 package kr.ac.jejunu.exchange;
 
 import kr.ac.jejunu.exchange.Model.Exchange;
-import kr.ac.jejunu.exchange.Model.User;
 import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.Test;
 import org.junit.runner.RunWith;

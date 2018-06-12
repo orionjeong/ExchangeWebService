@@ -74,8 +74,8 @@ public class UserTest {
         String phone = "010-0000-0000";
         User createUser = createUser(userId, name, password, email, phone);
         validate(userId, name, password, email, phone, createUser);
-        restTemplate.delete(PATH+"/"+createUser.getUserId());
-        User deleteUser = restTemplate.getForObject(PATH+"/"+createUser.getUserId(), User.class);
+        restTemplate.delete(PATH+"/"+ createUser.getUserId());
+        User deleteUser = restTemplate.getForObject(PATH+"/"+ createUser.getUserId(), User.class);
         assertThat(deleteUser.getUserId(), is(nullValue()));
         assertThat(deleteUser.getName(), is(nullValue()));
 
