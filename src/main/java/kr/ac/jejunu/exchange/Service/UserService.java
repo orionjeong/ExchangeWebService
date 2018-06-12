@@ -20,6 +20,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+
     //로그인 인증(암호화된 비밀번호 가져와서 확인)
     public UsernamePasswordAuthenticationToken login(String username, String password) throws SQLException, ClassNotFoundException {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -39,4 +40,27 @@ public class UserService {
         return new UsernamePasswordAuthenticationToken(user.getName(), user.getPassword(), grantedAuthorityList);
     }
 
+    public User getUser(Integer id) {
+        return userRepository.findById(id).get();
+    }
+
+    public List<User> getUserList() {
+        return userRepository.findAll();
+    }
+
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
+    public void deleteUser(Integer id) {
+        userRepository.delete(userRepository.findById(id).get());
+    }
+
+    public User getUserByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
 }

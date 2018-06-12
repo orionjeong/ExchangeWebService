@@ -34,6 +34,7 @@ public class ProductTest {
         assertThat(product.getContents(), is(contents));
         assertThat(product.getImage(), is(image));
     }
+
     @Test
     public void list() {
         List<Product> products = restTemplate.getForObject(PATH + "/list", List.class);

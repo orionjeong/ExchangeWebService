@@ -91,9 +91,9 @@ public class UserTest {
         assertThat(resultUser.getPhone(), is(phone));
     }
 
-    private User createUser(String userId, String name, String password, String email, String phone) {
+    private User createUser(String username, String name, String password, String email, String phone) {
         User user = new User();
-        user.setUserId(userId);
+        user.setUsername(username);
         user.setName(name);
         user.setPassword(password);
         user.setEmail(email);
