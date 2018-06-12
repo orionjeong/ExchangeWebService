@@ -20,5 +20,5 @@ public class User{
     String password;
     String email;
     String phone;
-    String type;
+    Integer type;
 }
