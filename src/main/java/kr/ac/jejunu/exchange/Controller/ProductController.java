@@ -2,17 +2,22 @@ package kr.ac.jejunu.exchange.Controller;
 
 import javafx.scene.control.Pagination;
 import kr.ac.jejunu.exchange.Model.Product;
+import kr.ac.jejunu.exchange.Model.User;
 import kr.ac.jejunu.exchange.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Locale;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
@@ -53,6 +58,13 @@ public class ProductController {
     {
         PageRequest pageRequest = PageRequest.of(page-1, 25, Sort.Direction.DESC, filter);
         return productRepository.findAllByCategoryLike(category, pageRequest);
+    }
+
+
+    @GetMapping("/resistrationList")
+    public List<Product> resistrationList(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       return productRepository.findAllByProvider(authentication.getName());
     }
 }
 

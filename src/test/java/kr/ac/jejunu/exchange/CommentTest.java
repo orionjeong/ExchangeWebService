@@ -46,6 +46,11 @@ public class CommentTest {
         List<Comment> comments= restTemplate.getForObject(PATH+"/list", List.class);
         assertThat(comments, not(IsEmptyCollection.empty()));
     }
+    @Test
+    public void listByproductId(){
+        List<Comment> exchanges = restTemplate.getForObject(PATH+"/list/search?productId=1", List.class);
+        assertThat(exchanges, not(IsEmptyCollection.empty()));
+    }
 
     @Test
     public void create(){

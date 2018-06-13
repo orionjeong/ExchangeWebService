@@ -1,4 +1,4 @@
-package kr.ac.jejunu.exchange.Controller;
+package kr.ac.jejunu.exchange.Util;
 
 import lombok.Data;
 

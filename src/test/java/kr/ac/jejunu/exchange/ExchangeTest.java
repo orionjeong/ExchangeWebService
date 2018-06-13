@@ -46,7 +46,11 @@ public class ExchangeTest {
         List<Exchange> exchanges = restTemplate.getForObject(PATH+"/list", List.class);
         assertThat(exchanges, not(IsEmptyCollection.empty()));
     }
-
+    @Test
+    public void listByproductId(){
+        List<Exchange> exchanges = restTemplate.getForObject(PATH+"/list/search?productId=1", List.class);
+        assertThat(exchanges, not(IsEmptyCollection.empty()));
+    }
     @Test
     public void create(){
         String title = "교환";

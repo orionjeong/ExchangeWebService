@@ -1,20 +1,17 @@
 package kr.ac.jejunu.exchange.Controller;
 
 
-import kr.ac.jejunu.exchange.Model.User;
 import kr.ac.jejunu.exchange.Service.UserService;
-import kr.ac.jejunu.exchange.Util.StateCode;
+import kr.ac.jejunu.exchange.Util.AuthenticationRequest;
+import kr.ac.jejunu.exchange.Util.AuthenticationToken;
 import lombok.AllArgsConstructor;
 
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

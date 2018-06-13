@@ -17,6 +17,7 @@ public class Product {
     String contents;
     String image;
     String category;
+    String provider;
     @Column(name = "views")
     Integer views;
     Integer likes;
