@@ -29,15 +29,16 @@
         <div class="logoImage">
             <img src="/image/logo.png" alt="">
         </div>
-        <form method="post">
-            <p><input class='id' type="text" name="uid" value="" placeholder="  ID"></p>
-            <p><input class='password' type="password" name="password" value="" placeholder="  Password"></p>
-            <input type="checkbox" id="chkRemember" name="chkRemember" tabindex="3" />
-            <label for="chkRemember">아이디 저장</label>
-            <p ><input class="btn_login" type="submit" name="submit" value="LOGIN"></p>
-        </form>
+        <div>
+            <p><input id='username' type="text" name="username" value="" placeholder="id를 입력하세요"></p>
+            <p><input id='password' type="password" name="password" value="" placeholder="Password를 입력하세요"></p>
+            <p><input type="checkbox" id="chkRemember" name="chkRemember" tabindex="3" />
+                <label for="chkRemember">아이디 저장</label></p>
+            <p ><input id="btn_login" type="button"  name="submit" value="LOGIN"></p>
+        </div>
     </div>
-
 </section>
 </body>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/js/login.js"></script>
 </html>

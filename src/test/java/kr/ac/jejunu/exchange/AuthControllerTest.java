@@ -34,29 +34,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AuthControllerTest {
-    @Autowired
-    TestRestTemplate testRestTemplate;
+
     @Autowired private WebApplicationContext wac;
     private MockMvc mvc;
 
     @Before
     public void setup() { mvc = MockMvcBuilders.webAppContextSetup(wac).build(); }
 
-    @Test
-    public void join(){
-        User user = new User();
-        user.setUsername("user1");
-        user.setPassword("pass1");
-        user.setName("user1");
-        user.setEmail("aaa@daum.net");
-        user.setPhone("010-0000-0000");
-        StateCode stateCode = testRestTemplate.postForObject("/signup", user, StateCode.class);
 
-        assertThat(stateCode.getStateCode(), is("200"));
-
-
-
-    }
     @Test
     public void login() throws Exception {
         AuthenticationRequest request = new AuthenticationRequest();

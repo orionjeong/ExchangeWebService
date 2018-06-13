@@ -50,19 +50,5 @@ public class AuthController {
 
     }
 
-    @PostMapping(value = "/signup")
-    public StateCode join(@RequestBody User user){
-        try {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setType(1);
-            userService.createUser(user);
-
-        }catch (Exception e){
-            //TODO 추후 아이디 중복 체크 기능 추가 (임시방편)
-            return  new StateCode("409", "이미 가입된 아이디가 존재합니다.");
-        }
-        return new StateCode("200", "회원가입에 성공하였습니다.");
-    }
 
 }

@@ -21,16 +21,16 @@ img{
 p{
     padding:2px;
 }
-.id{
+#username{
     height: 30px;
     width:100%;
 }
-.password{
+#password{
     height: 30px;
     width:100%;
 }
 
-.btn_login{
+#btn_login{
     width: 300px;
     height: 30px;
     color:#000;
