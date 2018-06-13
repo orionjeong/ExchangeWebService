@@ -2,6 +2,7 @@ package kr.ac.jejunu.exchange;
 
 
 import kr.ac.jejunu.exchange.Model.User;
+import kr.ac.jejunu.exchange.Util.StateCode;
 import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,13 +44,18 @@ public class UserTest {
 
     @Test
     public void create(){
-        String userId  = "user3";
-        String name = "aaa";
-        String password = "aaaa";
-        String email = "user@daum.net";
-        String phone = "010-0000-0000";
-        User createUser = createUser(userId, name, password, email, phone);
-        validate(userId,name ,password ,email ,phone, createUser);
+        User user = new User();
+        user.setUsername("user1");
+        user.setPassword("pass1");
+        user.setName("user1");
+        user.setEmail("aaa@daum.net");
+        user.setPhone("010-0000-0000");
+        StateCode stateCode = restTemplate.postForObject(PATH, user, StateCode.class);
+
+        assertThat(stateCode.getStateCode(), is("200"));
+
+
+
     }
 
     @Test
@@ -74,8 +80,8 @@ public class UserTest {
         String phone = "010-0000-0000";
         User createUser = createUser(userId, name, password, email, phone);
         validate(userId, name, password, email, phone, createUser);
-        restTemplate.delete(PATH+"/"+createUser.getUserId());
-        User deleteUser = restTemplate.getForObject(PATH+"/"+createUser.getUserId(), User.class);
+        restTemplate.delete(PATH+"/"+ createUser.getUserId());
+        User deleteUser = restTemplate.getForObject(PATH+"/"+ createUser.getUserId(), User.class);
         assertThat(deleteUser.getUserId(), is(nullValue()));
         assertThat(deleteUser.getName(), is(nullValue()));
 
@@ -91,9 +97,9 @@ public class UserTest {
         assertThat(resultUser.getPhone(), is(phone));
     }
 
-    private User createUser(String userId, String name, String password, String email, String phone) {
+    private User createUser(String username, String name, String password, String email, String phone) {
         User user = new User();
-        user.setUserId(userId);
+        user.setUsername(username);
         user.setName(name);
         user.setPassword(password);
         user.setEmail(email);

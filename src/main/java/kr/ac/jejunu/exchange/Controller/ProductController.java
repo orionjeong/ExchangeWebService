@@ -1,12 +1,17 @@
 package kr.ac.jejunu.exchange.Controller;
 
+import javafx.scene.control.Pagination;
 import kr.ac.jejunu.exchange.Model.Product;
 import kr.ac.jejunu.exchange.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/product")
@@ -41,7 +46,14 @@ public class ProductController {
         productRepository.delete(productRepository.findById(id).get());
     }
 
-
+    @GetMapping(value = "/list/search")
+    public Page<Product> pagingList(@RequestParam(defaultValue = "1") Integer page,
+                                    @RequestParam(defaultValue = "의류") String category,
+                                    @RequestParam(defaultValue = "productId") String filter)
+    {
+        PageRequest pageRequest = PageRequest.of(page-1, 25, Sort.Direction.DESC, filter);
+        return productRepository.findAllByCategoryLike(category, pageRequest);
+    }
 }
 
 
