@@ -21,7 +21,14 @@ function requestData(method, data) {
         sessionStorage.setItem("token",response.token);
         sessionStorage.setItem("user",response.username);
         window.location.href = "/view/login";
-    });
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        //권한 에러 처리 프론트에 위임
+    var status = jqXHR.status;
+        console.log(status);
+    if(status==403){
+        alert("아이디 비밀번호를 다시 확인해 주세요");
+    }
+    })
 }
 $(document).ready(function () {
 
@@ -48,4 +55,6 @@ $(document).ready(function () {
             localStorage.setItem("check","false");
         }
     });
+
+
 });

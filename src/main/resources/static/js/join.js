@@ -24,11 +24,15 @@ function requestData(method, data) {
     }).done(function (state) {
         if(state.stateCode=="200"){
             window.location.href = "/";
-        }else{
-            alert(state.messege);
         }
 
-    });
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        //권한 에러 처리 프론트에 위임
+        var status = jqXHR.status;
+        console.log(status);
+
+    })
+
 }
 $(document).ready(function () {
 
