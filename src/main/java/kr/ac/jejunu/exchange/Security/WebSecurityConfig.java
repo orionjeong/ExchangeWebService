@@ -10,9 +10,13 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
-
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.session.web.http.HttpSessionStrategy;
+
+
+
+
+
+
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -29,19 +33,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.authorizeRequests()
+        http.csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).
+        and().authorizeRequests()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/**").permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-
-
-
-        //일단 막아놓자
-        http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).
-                and().logout();
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().and().
+                logout();
 
 
 
@@ -62,7 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public HttpSessionStrategy httpSessionStrategy() {
         return new HeaderHttpSessionStrategy();
     }
-
 
 
 

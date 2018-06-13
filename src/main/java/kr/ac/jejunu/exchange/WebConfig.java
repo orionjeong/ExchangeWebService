@@ -13,15 +13,5 @@ import java.nio.charset.Charset;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
-    @Bean
-    public RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        for(HttpMessageConverter<?> messageConverter : restTemplate.getMessageConverters()) {
-            if(messageConverter instanceof AllEncompassingFormHttpMessageConverter) {
-                ((AllEncompassingFormHttpMessageConverter) messageConverter).setCharset(Charset.forName("UTF-8"));
-                ((AllEncompassingFormHttpMessageConverter) messageConverter).setMultipartCharset(Charset.forName("UTF-8"));
-            }
-        }
-        return restTemplate;
-    }
+
 }

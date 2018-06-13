@@ -10,7 +10,6 @@ import java.util.Collection;
 
 @Data
 @Entity
-
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
