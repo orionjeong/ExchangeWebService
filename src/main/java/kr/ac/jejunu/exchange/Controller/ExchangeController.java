@@ -41,5 +41,5 @@ public class ExchangeController {
         exchangeRepository.delete(exchangeRepository.findById(id).get());
     }
 
-
+  
 }
