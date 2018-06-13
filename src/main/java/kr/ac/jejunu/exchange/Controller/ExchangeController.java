@@ -41,5 +41,9 @@ public class ExchangeController {
         exchangeRepository.delete(exchangeRepository.findById(id).get());
     }
 
-  
+
+    @GetMapping("/list/search")
+    public List<Exchange> listByProductId(@RequestParam Integer productId){
+        return exchangeRepository.findByProductId(productId);
+    }
 }
