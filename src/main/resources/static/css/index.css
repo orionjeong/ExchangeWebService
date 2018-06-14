@@ -50,7 +50,7 @@ a:hover > .imgBox{
 }
 /*캐러셀 wrapper로 감싸져있는데 wrapper는 넓이의 4배를줘서(3배줘도 되지만 25%로 맞추기위해서) */
 .carousel-wrapper {
-    width: 400%;
+    width: 800%;
     height: 40vh;
     transition: all 0.4s ease-in-out;
 }
@@ -63,7 +63,7 @@ a:hover > .imgBox{
 /*25%를 줘도되는 이유는 wrapper가 400%니까 만약 300%면 33.3333%를 줘도된다.*/
 .carousel-item {
     float: left;
-    width: 25%;
+    width: 12.5%;
     height: 40vh;
 }
 .mainimg{

@@ -55,7 +55,7 @@
             <td><textarea name="contents" id="contents"></textarea></td>
         </tr>
     </table>
-    <form action="/products/image" method="POST" id="imageForm" name="imageData" enctype="multipart/form-data">
+    <form action="/api/product/image" method="POST" id="imageForm" name="imageData" enctype="multipart/form-data">
         <table>
             <tr>
                 <th><label for="image">이미지</label></th>
@@ -71,13 +71,14 @@
                 </td>
             </tr>
         </table>
-        >
+
         <div id="Btn">
             <input type="submit" class="addBtn" value="상품등록">
             <input type="button" id="cancle" value="취소하기" onClick="location.href='index.html'">
         </div>
     </form>
 </div>
+<script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/addproduct.js"></script>
 </body>
 </html>

@@ -23,7 +23,7 @@ filesUpload.onchange = function () {
 };
 
 //ajax
-var host = '/api/products';
+var host = '/api/product';
 
 function getUrlParams() {
     var params = {};
@@ -44,21 +44,27 @@ function save() {
 
     var method = 'POST';
 
-    if(product.id)
+    if(product.productId)
         method = 'PUT';
     requestData(method, product);
     return false;
 }
 
 function requestData(method, data) {
+
     $.ajax({
         url: host,
         method: method,
         contentType: "application/json;charset=UTF-8",
         data: JSON.stringify(data)
     }).done(function () {
-        window.location.href = 'productList';
-    });
+        alert("정보가 수정되었습니다.");
+        window.location.href = '/view/index';
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        //권한 에러 처리 프론트에 위임
+        alert("정보가 변경되지 않았습니다.");
+        window.location.href = '/view/index';
+    })
 }
 
 $(document).ready(function () {

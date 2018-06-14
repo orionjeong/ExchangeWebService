@@ -92,7 +92,7 @@ var addItem = function(){
 //캐러셀 클릭시 동작 x축으로 position만큼 빼버리면서 이동
 var carouselPosition = function(index){
     var carouselWrapper = findSelector('.carousel-wrapper');
-    var position = index * -25;
+    var position = index * -12.5;
     carouselWrapper.style.transform = 'translateX('+ position +'%)';
 }
 

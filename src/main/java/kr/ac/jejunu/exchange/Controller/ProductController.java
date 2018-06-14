@@ -4,12 +4,15 @@ import javafx.scene.control.Pagination;
 import kr.ac.jejunu.exchange.Model.Product;
 import kr.ac.jejunu.exchange.Model.User;
 import kr.ac.jejunu.exchange.Repository.ProductRepository;
+import kr.ac.jejunu.exchange.Util.StateCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +44,9 @@ public class ProductController {
 
     @PostMapping
     public Product create(@RequestBody Product product){
+        log.info("-----------------"+product);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        product.setProvider(authentication.getName());
         return productRepository.save(product);
     }
 
@@ -71,15 +77,17 @@ public class ProductController {
     }
 
     @PostMapping("/image")
-    public void createImage(@RequestParam("file")MultipartFile image) throws IOException {
-
+    public Object createImage(@RequestParam("file")MultipartFile image) {
+        log.info("_______________________________"+ image);
         String filename = image.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/production/resources/static/productImage/";
         new File(path).mkdirs();
-        if(image ==null){
-            return;
-        }
-        image.transferTo(new File(path + "origin" + filename));
+      try{
+          image.transferTo(new File(path  + filename));
+      }catch(IOException e){
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST ).body(null);
+      }
+      return new StateCode("200", "이미지가 수정되었습니다.");
     }
 }
 
