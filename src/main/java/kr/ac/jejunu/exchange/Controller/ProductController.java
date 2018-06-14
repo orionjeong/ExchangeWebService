@@ -4,7 +4,6 @@ import javafx.scene.control.Pagination;
 import kr.ac.jejunu.exchange.Model.Product;
 import kr.ac.jejunu.exchange.Model.User;
 import kr.ac.jejunu.exchange.Repository.ProductRepository;
-import kr.ac.jejunu.exchange.Util.StateCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +42,17 @@ public class ProductController {
         return  productRepository.findAll();    }
 
     @PostMapping
-    public Product create(@RequestBody Product product){
+    public ResponseEntity create(@RequestBody Product product){
         log.info("-----------------"+product);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         product.setProvider(authentication.getName());
-        return productRepository.save(product);
+        try{
+            productRepository.save(product);
+        }catch(Exception e){
+            e.printStackTrace();
+           return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     @PutMapping
@@ -77,7 +82,7 @@ public class ProductController {
     }
 
     @PostMapping("/image")
-    public Object createImage(@RequestParam("file")MultipartFile image) {
+    public ResponseEntity createImage(@RequestParam("file")MultipartFile image) {
         log.info("_______________________________"+ image);
         String filename = image.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/production/resources/static/productImage/";
@@ -85,9 +90,10 @@ public class ProductController {
       try{
           image.transferTo(new File(path  + filename));
       }catch(IOException e){
+          e.printStackTrace();
           return ResponseEntity.status(HttpStatus.BAD_REQUEST ).body(null);
       }
-      return new StateCode("200", "이미지가 수정되었습니다.");
+      return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }
 

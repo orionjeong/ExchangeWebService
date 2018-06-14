@@ -21,10 +21,9 @@ function requestData(method, data) {
         method: method,
         contentType: "application/json",
         data: JSON.stringify(data)
-    }).done(function (state) {
-        if(state.stateCode=="200"){
-            window.location.href = "/";
-        }
+    }).done(function (jqXHR, state) {
+        var status = jqXHR.status;
+        console.log(status);
 
     }).fail(function(jqXHR, textStatus, errorThrown){
         //권한 에러 처리 프론트에 위임
