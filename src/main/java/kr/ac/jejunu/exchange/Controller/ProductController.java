@@ -78,12 +78,11 @@ public class ProductController {
     @GetMapping("/resistrationList")
     public List<Product> resistrationList(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       return productRepository.findAllByProvider(authentication.getName());
+        return productRepository.findAllByProvider(authentication.getName());
     }
 
     @PostMapping("/image")
     public ResponseEntity createImage(@RequestParam("file")MultipartFile image) {
-        log.info("_______________________________"+ image);
         String filename = image.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/production/resources/static/productImage/";
         new File(path).mkdirs();
@@ -91,9 +90,14 @@ public class ProductController {
           image.transferTo(new File(path  + filename));
       }catch(IOException e){
           e.printStackTrace();
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST ).body(null);
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
       }
       return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String checkUser(NullPointerException e){
+        return "login";
     }
 }
 

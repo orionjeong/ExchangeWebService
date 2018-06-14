@@ -58,11 +58,12 @@ function requestData(method, data) {
         contentType: "application/json;charset=UTF-8",
         data: JSON.stringify(data)
     }).done(function () {
-        alert("정보가 수정되었습니다.");
+        alert("상품에 대한 처리가 완료되었습니다.");
         window.location.href = '/view/index';
     }).fail(function(jqXHR, textStatus, errorThrown){
         //권한 에러 처리 프론트에 위임
-        alert("정보가 변경되지 않았습니다.");
+
+        alert("상품에 대한 처리가 실패하였습니다.");
         window.location.href = '/view/index';
     })
 }

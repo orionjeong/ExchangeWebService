@@ -20,7 +20,7 @@ function requestData(method, data) {
     }).done(function (response) {
         sessionStorage.setItem("token",response.token);
         sessionStorage.setItem("user",response.username);
-        window.location.href = "/view/login";
+        window.location.href = "/view/index";
     }).fail(function(jqXHR, textStatus, errorThrown){
         //권한 에러 처리 프론트에 위임
     var status = jqXHR.status;
