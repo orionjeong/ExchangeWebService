@@ -1,9 +1,12 @@
 package kr.ac.jejunu.exchange.Controller;
 
 import kr.ac.jejunu.exchange.Model.Basket;
+import kr.ac.jejunu.exchange.Model.Thumbup;
 import kr.ac.jejunu.exchange.Repository.BasketRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,5 +42,11 @@ public class BasketController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id){
         basketRepository.delete(basketRepository.findById(id).get());
+    }
+
+    @GetMapping("/resistrationList")
+    public List<Basket> resistrationLIst(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return basketRepository.findAllByUsername(authentication.getName());
     }
 }

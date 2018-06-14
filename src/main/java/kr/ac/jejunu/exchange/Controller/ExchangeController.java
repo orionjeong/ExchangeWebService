@@ -42,4 +42,8 @@ public class ExchangeController {
     }
 
 
+    @GetMapping("/list/search")
+    public List<Exchange> listByProductId(@RequestParam Integer productId){
+        return exchangeRepository.findByProductId(productId);
+    }
 }

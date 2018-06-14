@@ -39,4 +39,9 @@ public class CommentController {
     public void delete(@PathVariable Integer id ){
         commentRepository.delete(commentRepository.findById(id).get());
     }
+
+    @GetMapping("/list/search")
+    public List<Comment> listByProductId(@RequestParam Integer productId){
+        return commentRepository.findByProductId(productId);
+    }
 }

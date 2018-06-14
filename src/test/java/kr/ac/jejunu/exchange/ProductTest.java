@@ -2,6 +2,7 @@ package kr.ac.jejunu.exchange;
 
 import kr.ac.jejunu.exchange.Model.User;
 import kr.ac.jejunu.exchange.Model.Product;
+import kr.ac.jejunu.exchange.Repository.UserRepository;
 import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,8 @@ public class ProductTest {
     public static final String PATH = "/api/product";
     @Autowired
     private TestRestTemplate restTemplate;
+    @Autowired
+    private UserRepository userRepository;
     @Test
     public void get() {
         Integer id = 1;
@@ -38,6 +41,13 @@ public class ProductTest {
     @Test
     public void list() {
         List<Product> products = restTemplate.getForObject(PATH + "/list", List.class);
+        assertThat(products, not(IsEmptyCollection.empty()));
+    }
+
+    //user를 서버에서 넣기 때문에 인증안됬을 경우 anonymousUser를 가져오므로 이를  db에 넣고 test
+    @Test
+    public void listByProvider(){
+        List<Product> products = restTemplate.getForObject(PATH+"/resistrationList", List.class);
         assertThat(products, not(IsEmptyCollection.empty()));
     }
     @Test
