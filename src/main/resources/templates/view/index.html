@@ -2,11 +2,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/init.css">
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
+<div class="container-fluid">
+    <header class="head">
+        <h1 class="logo" >
+            <img src="/image/logo.png" alt="">
+        </h1>
+        <!-- 홈페이지 menu화면  -->
+        <nav class="menu">
+            <ul>
+                <li class="menu_item"><a href="">회원가입</a></li>
+                <li class="menu_item"><a href="">로그인</a></li>
+                <li class="menu_item"><a href="">상품등록</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+</div>
+<div class="container">
+    <h1>1boon</h1>
+    <hr>
+    <!--carousel관련 코드시작  -->
+    <section class="carousel">
+        <div class="carousel-wrapper">
+            <article class="carousel-item">
+                <img class="mainimg"src="/image/trending.png">
+            </article>
+            <article class="carousel-item">
+                <img class="mainimg"src="/image/issue.png">
+            </article>
+            <article class="carousel-item">
+                <img class="mainimg"src="/image/enter.png">
+            </article>
+        </div>
+    </section>
+    <hr>
+    <div>
+        <ul class="nav nav-tabs">
+            <!-- 선택된탭:선택된 탭에 .active    -->
+            <li class="active" data="1"><a href="#">의류</a></li>
+            <li data="2"><a href="#">잡화</a></li>
+            <li data="3"><a href="#">식품</a></li>
+            <li data="4"><a href="#">유아</a></li>
+            <li data="5"><a href="#">가구</a></li>
+            <li data="6"><a href="#">디지털</a></li>
+            <li data="7"><a href="#">스포츠</a></li>
+            <li data="8"><a href="#">도서</a></li>
+
+        </ul>
+    </div>
+
+    <div id="list">
+    <!-- 여기에 데이터가 뿌려진다. -->
+    </div>
+    <div class="text-center">
+        <div class="loader"></div>
+        <!-- loader는 로딩중임을 표시한다. -->
+        <div class="btnView">더보기</div>
+    </div>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <!-- dom객체 찾기위한 js모듈 -->
+    <script src="/js/find.js"></script>
+    <!-- jsonp.js이용하여 원하는 모양의 데이터 출력하기위한 js모듈 -->
+    <script src="/js/choicejson.js"></script>
+    <!-- jsonpjs모듈 -->
+    <script src="/js/jsonp.js"></script>
+    <!-- 원하는 동작위한 전체적인 js모듈 -->
+    <script src="/js/index.js"></script>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,100 @@
+
+/*img크기를 정사각형으로 만들기 위하여 높이0주고 padding으로 비율을맞춤*/
+.imgBox
+{
+    height: 0;
+    padding-bottom: 60%;
+    overflow: hidden;
+}
+/*text크기 고정 후 만약 사이즈 변경할 시 자동으로 가변으로변하게하기위해 em을 사용*/
+.textBox{font-size: 1.2em; height: 60px;margin-top: 20px;}
+/*list_item의 구분선을 나타내기위해서 표현*/
+.list_item{
+    padding-top: 10px;
+    border-right: 1px solid #EAEAEA;
+    border-bottom: 1px solid #EAEAEA;
+}
+/*a태그hover하면 자식 img에 이벤트반영 하기위한 css*/
+a:hover > .imgBox{
+    box-shadow: 10px 10px 5px #888888;
+}
+/*마지막 오른쪽soild지운 css*/
+.deleteSolid{
+    padding-top: 10px;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+/*loading관련css*/
+.loader{
+    display: block;
+    margin: 15px auto;
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/*캐러셀 관련css*/
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    overflow: hidden;
+}
+/*캐러셀 wrapper로 감싸져있는데 wrapper는 넓이의 4배를줘서(3배줘도 되지만 25%로 맞추기위해서) */
+.carousel-wrapper {
+    width: 400%;
+    height: 40vh;
+    transition: all 0.4s ease-in-out;
+}
+
+.carousel-wrapper::after {
+    content: '';
+    display: block;
+    clear: left;
+}
+/*25%를 줘도되는 이유는 wrapper가 400%니까 만약 300%면 33.3333%를 줘도된다.*/
+.carousel-item {
+    float: left;
+    width: 25%;
+    height: 40vh;
+}
+.mainimg{
+    max-height: 100%;min-height: 100%;
+}
+
+/*button관련css transition을 줘서 천천히 변하게 한다. */
+.btnView{
+    margin: 50px 0 10px 0;
+    font-size:10px;
+    line-height: 10px;
+    text-transform: uppercase;
+    display:inline-block;
+    padding:10px 40px;
+    border-radius: 1000px;
+    border:1px solid #181818;
+    transition: 0.2s all ease-in-out ;
+
+}
+.btnView:hover{
+    background-color: #181818;
+    color:#fff;
+}
+.btnBox{
+    margin-left:50%;
+}
+.btnBox > img{
+    width:30%;
+    margin-left:10px;
+}
+
+.countBox{
+    float: left;
+}
