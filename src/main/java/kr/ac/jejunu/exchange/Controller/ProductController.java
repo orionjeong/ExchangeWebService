@@ -13,7 +13,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -65,6 +68,18 @@ public class ProductController {
     public List<Product> resistrationList(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
        return productRepository.findAllByProvider(authentication.getName());
+    }
+
+    @PostMapping("/image")
+    public void createImage(@RequestParam("file")MultipartFile image) throws IOException {
+
+        String filename = image.getOriginalFilename();
+        String path = System.getProperty("user.dir") + "/out/production/resources/static/productImage/";
+        new File(path).mkdirs();
+        if(image ==null){
+            return;
+        }
+        image.transferTo(new File(path + "origin" + filename));
     }
 }
 

@@ -34,7 +34,7 @@ function getBtn(category,page){
                 //bootstrap 그리드시스템이용하여 1boon처럼 나오게하기 마지막 item right solid는 제거
                 if(i%4==3){str += '<div class="col-xs-6 col-md-3 col-sm-6 deleteSolid"><a href="http://1boon.kakao.com/'+result[i].path+'">'
                 }else{str += '<div class="col-xs-6 col-md-3 col-sm-6 list_item"><a href="http://1boon.kakao.com/'+result[i].path+'">'}
-                str +='<div class="imgBox"><img src=' + result[i].image+'></div>'
+                str +='<div class="imgBox"><img src=' + result[i].image+'></div></a>'
                 str += '<p class="textBox">'+result[i].title+'</p>'
                 str +='<div class="countBox">'
                 str += '<p class="count-num"><b>'+result[i].views+'명이</b> 봤어요</p>'
@@ -45,7 +45,7 @@ function getBtn(category,page){
                 str += '<img src="/image/like_btn_1.png" alt="" class="like_btn 1" name="">'
 
                 str += '</div>'
-                str += '</a></div>'
+                str += '</div>'
             }
             str +='</div>'
             // list에 str을 넣어서 데이터추가
