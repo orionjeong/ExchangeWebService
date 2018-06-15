@@ -45,7 +45,7 @@ function save(productId) {
 
     var method = 'POST';
 
-    requestData(method, product);
+    requestData(method, exchange);
     return false;
 }
 
@@ -63,7 +63,8 @@ function requestData(method, data) {
         //권한 에러 처리 프론트에 위임
 
         alert("교환에 대한 처리가 실패하였습니다.");
-        window.location.href = '/view/productDetail?productId='+productId;    })
+        window.location.href = '/view/productDetail?productId='+productId;
+        })
 }
 
 $(document).ready(function () {

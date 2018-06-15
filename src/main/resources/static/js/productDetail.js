@@ -14,7 +14,7 @@ function move(productId) {
 $(document).ready(function () {
     var params = getUrlParams();
     if (params.productId) {
-        $.get(host +   + params.productId, function (product) {
+        $.get(host + params.productId, function (product) {
                 $('.productName').text(product.title),
                 $('.category2').val(product.category),
                 $('.main-image > img').attr("src", "/productImage/"+product.image),
@@ -22,6 +22,17 @@ $(document).ready(function () {
                 $('.contents > .info').text(product.contents),
                 $('.views > .info').text(product.views),
                 $('.likes > .info').text(product.likes)
+        });
+
+        $.get("/exchange/list/search?productId"  + params.productId, function (exchange) {
+            // $('.productName').text(product.title),
+            //     $('.category2').val(product.category),
+            //     $('.main-image > img').attr("src", "/productImage/"+product.image),
+            //     $('.provider-id > .info').text(product.provider),
+            //     $('.contents > .info').text(product.contents),
+            //     $('.views > .info').text(product.views),
+            //     $('.likes > .info').text(product.likes)
+            console.log(product);
         });
     }
 
