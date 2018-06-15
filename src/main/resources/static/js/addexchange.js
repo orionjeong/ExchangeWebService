@@ -1,6 +1,7 @@
 var filesUpload = document.getElementById("image"),
     fileList = document.getElementById("file-list");
 var fileName;
+var productId;
 function traverseFiles (files) {
     var li,
         file,
@@ -23,7 +24,7 @@ filesUpload.onchange = function () {
 };
 
 //ajax
-var host = '/api/product';
+var host = '/api/exchange';
 
 function getUrlParams() {
     var params = {};
@@ -33,9 +34,9 @@ function getUrlParams() {
     return params;
 }
 
-function save() {
-    var product = {
-        productId:$('#productId').text(),
+function save(productId) {
+    var exchange = {
+        productId:productId,
         title:$('#title').val(),
         contents: $('#contents').val(),
         category: $('#category').val(),
@@ -44,9 +45,7 @@ function save() {
 
     var method = 'POST';
 
-    if(product.productId)
-        method = 'PUT';
-    requestData(method, product);
+    requestData(method, exchange);
     return false;
 }
 
@@ -58,29 +57,21 @@ function requestData(method, data) {
         contentType: "application/json;charset=UTF-8",
         data: JSON.stringify(data)
     }).done(function () {
-        alert("상품에 대한 처리가 완료되었습니다.");
-        window.location.href = '/view/index';
+        alert("교환에 대한 처리가 완료되었습니다.");
+        window.location.href = '/view/productDetail?productId='+productId;
     }).fail(function(jqXHR, textStatus, errorThrown){
         //권한 에러 처리 프론트에 위임
 
-        alert("상품에 대한 처리가 실패하였습니다.");
-        window.location.href = '/view/index';
-    })
+        alert("교환에 대한 처리가 실패하였습니다.");
+        window.location.href = '/view/productDetail?productId='+productId;
+        })
 }
 
 $(document).ready(function () {
     var params = getUrlParams();
-    if (params.productId) {
-        $.get(host + "/" + params.productId, function (product) {
-                $('#productId').text(product.productId);
-                $('#title').val(product.title),
-                $('#category').val(product.category),
-                $('#contents').val(product.contents),
-                $('#image').val(product.image)
-        });
-    }
+    productId = params.productId;
     $('#imageForm').submit(function(){
-        save();
+        save( params.productId);
         return true;
     } ) ;
 

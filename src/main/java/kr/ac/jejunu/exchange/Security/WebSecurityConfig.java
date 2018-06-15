@@ -33,24 +33,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.csrf().disable().exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).
         and().authorizeRequests()
+                .antMatchers("/view/addproduct").authenticated()
+                .antMatchers("/view/addexchange").authenticated()
+                .antMatchers("/view/productList").authenticated()
+                .antMatchers("/view/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/api/product").access("hasRole('ROLE_USER')")
+                .antMatchers(HttpMethod.DELETE, "/api/**/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/product/**").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("api/user/**").access("hasRole('ROLE_USER')")
-//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/**").permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().and().
-                logout();
-
-
-
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/view/index");;
 
         http.authenticationProvider(authProvider);
-
-
-
-
     }
 
     @Bean

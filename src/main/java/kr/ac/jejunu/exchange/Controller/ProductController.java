@@ -4,7 +4,6 @@ import javafx.scene.control.Pagination;
 import kr.ac.jejunu.exchange.Model.Product;
 import kr.ac.jejunu.exchange.Model.User;
 import kr.ac.jejunu.exchange.Repository.ProductRepository;
-import kr.ac.jejunu.exchange.Util.StateCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +42,17 @@ public class ProductController {
         return  productRepository.findAll();    }
 
     @PostMapping
-    public Product create(@RequestBody Product product){
+    public ResponseEntity create(@RequestBody Product product){
         log.info("-----------------"+product);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         product.setProvider(authentication.getName());
-        return productRepository.save(product);
+        try{
+            productRepository.save(product);
+        }catch(Exception e){
+            e.printStackTrace();
+           return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     @PutMapping
@@ -65,29 +70,35 @@ public class ProductController {
                                     @RequestParam(defaultValue = "의류") String category,
                                     @RequestParam(defaultValue = "productId") String filter)
     {
-        PageRequest pageRequest = PageRequest.of(page-1, 25, Sort.Direction.DESC, filter);
+        PageRequest pageRequest = PageRequest.of(page-1, 12, Sort.Direction.DESC, filter);
         return productRepository.findAllByCategoryLike(category, pageRequest);
     }
 
 
     @GetMapping("/resistrationList")
-    public List<Product> resistrationList(){
+    public Page<Product> resistrationList(@RequestParam Integer page){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       return productRepository.findAllByProvider(authentication.getName());
+        PageRequest pageRequest = PageRequest.of(page-1,5);
+        return productRepository.findAllByProvider(authentication.getName(), pageRequest);
     }
 
     @PostMapping("/image")
-    public Object createImage(@RequestParam("file")MultipartFile image) {
-        log.info("_______________________________"+ image);
+    public ResponseEntity createImage(@RequestParam("file")MultipartFile image) {
         String filename = image.getOriginalFilename();
         String path = System.getProperty("user.dir") + "/out/production/resources/static/productImage/";
         new File(path).mkdirs();
       try{
           image.transferTo(new File(path  + filename));
       }catch(IOException e){
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST ).body(null);
+          e.printStackTrace();
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
       }
-      return new StateCode("200", "이미지가 수정되었습니다.");
+      return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String checkUser(NullPointerException e){
+        return "login";
     }
 }
 

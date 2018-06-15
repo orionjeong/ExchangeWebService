@@ -5,6 +5,8 @@ import kr.ac.jejunu.exchange.Model.Thumbup;
 import kr.ac.jejunu.exchange.Repository.BasketRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +33,21 @@ public class BasketController {
     }
 
     @PostMapping
-    public Basket create(@RequestBody Basket basket){
-        return basketRepository.save(basket);
+    public ResponseEntity create(@RequestBody Basket basket){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication.getName()=="anonymousUser"){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
+        basket.setUsername(authentication.getName());
+        try{
+            basketRepository.save(basket);
+        } catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+
+
     }
 
     @PutMapping

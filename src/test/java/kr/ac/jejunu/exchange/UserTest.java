@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -50,9 +51,9 @@ public class UserTest {
         user.setName("user1");
         user.setEmail("aaa@daum.net");
         user.setPhone("010-0000-0000");
-        StateCode stateCode = restTemplate.postForObject(PATH, user, StateCode.class);
+        ResponseEntity responseEntity =restTemplate.postForObject(PATH, user, ResponseEntity.class);
 
-        assertThat(stateCode.getStateCode(), is("200"));
+        assertThat(responseEntity.getStatusCode(), is("200"));
 
 
 

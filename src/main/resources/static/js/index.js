@@ -99,3 +99,4 @@ var carouselPosition = function(index){
 //click togleActive이벤트 추가하기
 elemNav.addEventListener('click',togleActive, false);
 elemBtn.addEventListener('click',addItem, false);
+

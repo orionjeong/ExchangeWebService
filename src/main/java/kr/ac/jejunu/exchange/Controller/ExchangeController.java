@@ -5,8 +5,13 @@ import kr.ac.jejunu.exchange.Model.Exchange;
 import kr.ac.jejunu.exchange.Repository.ExchageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @RestController
@@ -27,8 +32,16 @@ public class ExchangeController {
     }
 
     @PostMapping
-    public Exchange create(@RequestBody Exchange exchange){
-      return exchangeRepository.save(exchange);
+    public ResponseEntity create(@RequestBody Exchange exchange){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        exchange.setUserId(authentication.getName());
+        try{
+            exchangeRepository.save(exchange);
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     @PutMapping

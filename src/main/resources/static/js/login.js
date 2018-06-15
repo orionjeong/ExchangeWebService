@@ -18,9 +18,14 @@ function requestData(method, data) {
         contentType: "application/json",
         data: JSON.stringify(data)
     }).done(function (response) {
-        sessionStorage.setItem("token",response.token);
-        sessionStorage.setItem("user",response.username);
-        window.location.href = "/view/login";
+        console.log(response.username);
+        if(response.username==undefined) {
+            alert("아이디 비밀번호를 다시 확인해 주세요");
+        }else{
+            sessionStorage.setItem("token",response.token);
+            sessionStorage.setItem("user",response.username);
+            window.location.href = "/view/index";
+        }
     }).fail(function(jqXHR, textStatus, errorThrown){
         //권한 에러 처리 프론트에 위임
     var status = jqXHR.status;
