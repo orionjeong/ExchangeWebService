@@ -42,8 +42,8 @@ function getBtn(category,page){
                 str += '<p class="like-num"><b>'+result[i].likes+'명이</b> 좋아해요.</p>'
                 str += '</div>'
                 str += '<div class="btnBox">'
-                str += '<img src="/image/cart_btn_0.png" alt="" class="cart_btn" name="">'
-                str += '<img src="/image/like_btn_1.png" alt="" class="like_btn 1" name="">'
+                str += '<img src="/image/cart_btn_0.png" alt="" class="cart_btn" name='+result[i].productId+'>'
+                str += '<img src="/image/like_btn_1.png" alt="" class="like_btn" name="">'
 
                 str += '</div>'
                 str += '</div>'
@@ -54,7 +54,31 @@ function getBtn(category,page){
             // loading이 끝나면 none으로 없애기
             elemLoader.style.display='none';
 
+            $(".like_btn").on('click', function () {
+                var id = $(this).attr('name');
+                var thumbup = {
+                    productId: id
+                }
+                $.ajax({
+                    url: "/api/thumbup",
+                    method: "POST",
+                    contentType: "application/json;charset=UTF-8",
+                    data: JSON.stringify(thumbup)
+                }).done(function () {
+                    alert("좋아요에 대한 처리가 완료되었습니다.");
+                }).fail(function(jqXHR, textStatus, errorThrown){
+                    //권한 에러 처리 프론트에 위임
+                    if(jqXHR.status == "409"){
+                        alert("이미 좋아요를 누른 상품입니다.");
+                    }else if(jqXHR.status == "403") {
+                        alert("로그인이 필요합니다.");
+                        window.location.href = '/view/login';
+                    }
 
+
+                })
+
+            })
         }
 
     })

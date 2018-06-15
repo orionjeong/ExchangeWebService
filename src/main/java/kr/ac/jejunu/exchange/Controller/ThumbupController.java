@@ -5,10 +5,13 @@ import kr.ac.jejunu.exchange.Repository.ThumbupRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -30,9 +33,22 @@ public class ThumbupController {
     }
 
     @PostMapping
-    public Thumbup create(@RequestBody Thumbup thumbup){
-        return thumbupRepository.save(thumbup);
-    }
+    public ResponseEntity create(@RequestBody Thumbup thumbup){
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication.getName()=="anonymousUser"){
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+         }
+        thumbup.setUsername(authentication.getName());
+        try{
+        thumbupRepository.save(thumbup);
+
+        } catch(Exception e){
+             e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+          return ResponseEntity.status(HttpStatus.OK).body(null);}
+
+
 
     @PutMapping
     public void update(@RequestBody Thumbup thumbup){
