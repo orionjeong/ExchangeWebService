@@ -37,13 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).
         and().authorizeRequests()
                 .antMatchers("/view/addproduct").authenticated()
+                .antMatchers("/view/addexchange").authenticated()
                 .antMatchers("/view/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/api/product").access("hasRole('ROLE_USER')")
                 .antMatchers(HttpMethod.DELETE, "/api/**/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/api/product/**").permitAll()
                 .antMatchers("/login").permitAll()
-                .anyRequest().authenticated()
                 .and().logout();
 
         http.authenticationProvider(authProvider);

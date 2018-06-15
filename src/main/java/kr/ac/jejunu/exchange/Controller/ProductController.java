@@ -70,7 +70,7 @@ public class ProductController {
                                     @RequestParam(defaultValue = "의류") String category,
                                     @RequestParam(defaultValue = "productId") String filter)
     {
-        PageRequest pageRequest = PageRequest.of(page-1, 25, Sort.Direction.DESC, filter);
+        PageRequest pageRequest = PageRequest.of(page-1, 12, Sort.Direction.DESC, filter);
         return productRepository.findAllByCategoryLike(category, pageRequest);
     }
 

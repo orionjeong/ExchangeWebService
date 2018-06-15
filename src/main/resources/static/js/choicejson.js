@@ -4,6 +4,7 @@ var elemLoader = findClass('loader',0);
 var elemList;
 var str;
 
+
 // 탭 및 더보기 눌렀을 때 원하는 데이터 가져오기 위한 함수
 function getBtn(category,page){
   var url = "/api/product/list/search?page="+page+"&category="+category;
@@ -32,8 +33,8 @@ function getBtn(category,page){
                     str+='</div><div class="row">'
                 }
                 //bootstrap 그리드시스템이용하여 1boon처럼 나오게하기 마지막 item right solid는 제거
-                if(i%4==3){str += '<div class="col-xs-6 col-md-3 col-sm-6 deleteSolid"><a href="http://1boon.kakao.com/'+result[i].path+'">'
-                }else{str += '<div class="col-xs-6 col-md-3 col-sm-6 list_item"><a href="http://1boon.kakao.com/'+result[i].path+'">'}
+                if(i%4==3){str += '<div class="col-xs-6 col-md-3 col-sm-6 deleteSolid"><a href="/view/productDetail?productId='+result[i].productId+'">'
+                }else{str += '<div class="col-xs-6 col-md-3 col-sm-6 list_item"><a href="/view/productDetail?productId='+result[i].productId+'">'}
                 str +='<div class="imgBox"><img src="/productImage/' + result[i].image+'"></div></a>'
                 str += '<p class="textBox">'+result[i].title+'</p>'
                 str +='<div class="countBox">'
@@ -52,6 +53,8 @@ function getBtn(category,page){
             elemList.innerHTML = str;
             // loading이 끝나면 none으로 없애기
             elemLoader.style.display='none';
+
+
         }
 
     })
