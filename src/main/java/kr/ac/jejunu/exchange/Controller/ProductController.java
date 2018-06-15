@@ -76,9 +76,10 @@ public class ProductController {
 
 
     @GetMapping("/resistrationList")
-    public List<Product> resistrationList(){
+    public Page<Product> resistrationList(@RequestParam Integer page){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return productRepository.findAllByProvider(authentication.getName());
+        PageRequest pageRequest = PageRequest.of(page,5);
+        return productRepository.findAllByProvider(authentication.getName(), pageRequest);
     }
 
     @PostMapping("/image")
