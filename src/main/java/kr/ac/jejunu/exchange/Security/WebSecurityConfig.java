@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/api/**/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/api/product/**").permitAll()
                 .antMatchers("/login").permitAll()
-                .and().logout();
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/view/index");;
 
         http.authenticationProvider(authProvider);
     }
