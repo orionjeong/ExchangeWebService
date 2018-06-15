@@ -34,7 +34,7 @@ public class ThumbupController {
 
     @PostMapping
     public ResponseEntity create(@RequestBody Thumbup thumbup){
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication.getName()=="anonymousUser"){
          return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
          }
@@ -46,7 +46,8 @@ public class ThumbupController {
              e.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
-          return ResponseEntity.status(HttpStatus.OK).body(null);}
+          return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
 
 
 
