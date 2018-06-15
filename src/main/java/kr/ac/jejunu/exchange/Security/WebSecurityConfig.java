@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         and().authorizeRequests()
                 .antMatchers("/view/addproduct").authenticated()
                 .antMatchers("/view/addexchange").authenticated()
+                .antMatchers("/view/productList").authenticated()
                 .antMatchers("/view/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/api/product").access("hasRole('ROLE_USER')")

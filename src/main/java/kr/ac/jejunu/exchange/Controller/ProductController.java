@@ -78,7 +78,7 @@ public class ProductController {
     @GetMapping("/resistrationList")
     public Page<Product> resistrationList(@RequestParam Integer page){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PageRequest pageRequest = PageRequest.of(page,5);
+        PageRequest pageRequest = PageRequest.of(page-1,5);
         return productRepository.findAllByProvider(authentication.getName(), pageRequest);
     }
 

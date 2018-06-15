@@ -3,11 +3,11 @@
 var elemLoader = findClass('loader',0);
 var elemList;
 var str;
-
+var count=1;
 
 // 탭 및 더보기 눌렀을 때 원하는 데이터 가져오기 위한 함수
-function getBtn(category,page){
-    var url = "/api/product/list/search?page="+page+"&category="+category;
+function getBtnList(page){
+    var url = "/api/product/resistrationList?page="+page;
 
     elemList = findId('list');
 
@@ -59,3 +59,16 @@ function getBtn(category,page){
 
     })
 }
+
+
+
+getBtnList(1);
+
+var addItem = function(){
+    // 더보기 누를 수록 count증가시켜서 원하는 데이터만 불러와서 추가하는 형식
+    count +=1;
+    getBtnList(count);
+}
+
+
+$('#btn').on('click', addItem());

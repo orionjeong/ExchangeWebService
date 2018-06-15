@@ -19,6 +19,7 @@
                 <li class="menu_item"><a href="/view/join">회원가입</a></li>
                 <li class="menu_item"><a href="/view/login">로그인</a></li>
                 <li class="menu_item"><a href="/view/addproduct">상품등록</a></li>
+                <li class="menu_item"><a href="/view/productList">내가 등록한 상품</a></li>
             </ul>
         </nav>
     </header>
@@ -28,6 +29,11 @@
     <div id="list">
         <!-- 여기에 데이터가 뿌려진다. -->
     </div>
+
+<div class="text-center">
+    <div class="loader"></div>
+    <!-- loader는 로딩중임을 표시한다. -->
+    <div id="btn">더보기</div>
 </div>
 
 <script src="/js/jquery-3.3.1.min.js"></script>
@@ -38,6 +44,5 @@
 <!-- jsonpjs모듈 -->
 <script src="/js/jsonp.js"></script>
 <!-- 원하는 동작위한 전체적인 js모듈 -->
-<script src="/js/index.js"></script>
 </body>
 </html>
