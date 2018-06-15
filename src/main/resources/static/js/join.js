@@ -22,9 +22,8 @@ function requestData(method, data) {
         contentType: "application/json",
         data: JSON.stringify(data)
     }).done(function (jqXHR, state) {
-        var status = jqXHR.status;
-        console.log(status);
-
+        alert("회원가입이 완료되었습니다.");
+        window.location.href = "/view/index";
     }).fail(function(jqXHR, textStatus, errorThrown){
         //권한 에러 처리 프론트에 위임
         var status = jqXHR.status;
