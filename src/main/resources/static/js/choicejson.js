@@ -42,8 +42,8 @@ function getBtn(category,page){
                 str += '<p class="like-num"><b>'+result[i].likes+'명이</b> 좋아해요.</p>'
                 str += '</div>'
                 str += '<div class="btnBox">'
-                str += '<img src="/image/cart_btn_0.png" alt="" class="cart_btn" name='+result[i].productId+'>'
-                str += '<img src="/image/like_btn_1.png" alt="" class="like_btn" name="">'
+                str += '<img src="/image/cart_btn_0.png" alt="" class="cart_btn" name="">'
+                str += '<img src="/image/like_btn_1.png" alt="" class="like_btn" name='+result[i].productId+'>'
 
                 str += '</div>'
                 str += '</div>'
@@ -64,7 +64,8 @@ function getBtn(category,page){
                     method: "POST",
                     contentType: "application/json;charset=UTF-8",
                     data: JSON.stringify(thumbup)
-                }).done(function () {
+                }).done(function (jqXHR, state) {
+                    console.log(jqXHR.status);
                     alert("좋아요에 대한 처리가 완료되었습니다.");
                 }).fail(function(jqXHR, textStatus, errorThrown){
                     //권한 에러 처리 프론트에 위임

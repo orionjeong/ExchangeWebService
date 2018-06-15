@@ -36,7 +36,7 @@ public class ThumbupController {
     public ResponseEntity create(@RequestBody Thumbup thumbup){
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication.getName()=="anonymousUser"){
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
          }
         thumbup.setUsername(authentication.getName());
         try{
