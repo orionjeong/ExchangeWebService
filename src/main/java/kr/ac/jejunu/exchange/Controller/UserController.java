@@ -3,7 +3,7 @@ package kr.ac.jejunu.exchange.Controller;
 import kr.ac.jejunu.exchange.Model.User;
 import kr.ac.jejunu.exchange.Repository.UserRepository;
 import kr.ac.jejunu.exchange.Service.UserService;
-import kr.ac.jejunu.exchange.Util.StateCode;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +45,7 @@ public class UserController {
 //            return  new StateCode("409", "이미 가입된 아이디가 존재합니다.");
             return ResponseEntity.status(HttpStatus.CONFLICT ).body(null);
         }
-        return new StateCode("200", "회원가입에 성공하였습니다.");
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
     //Todo 업데이트 성공 실패 여부 리턴 필요
     @PutMapping
