@@ -37,7 +37,7 @@ public class UserService {
             case 2:
                 grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_NO"));
         }
-        return new UsernamePasswordAuthenticationToken(user.getName(), user.getPassword(), grantedAuthorityList);
+        return new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), grantedAuthorityList);
     }
 
     public User getUser(Integer id) {

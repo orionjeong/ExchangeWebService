@@ -1,0 +1,42 @@
+.container{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.logoImage{
+    width: 100%;
+}
+img{
+    width:100%;
+}
+.login{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+p{
+    padding:2px;
+}
+#username{
+    height: 30px;
+    width:100%;
+}
+#password{
+    height: 30px;
+    width:100%;
+}
+
+#btn_login{
+    width: 300px;
+    height: 30px;
+    color:#000;
+    background-color:#eee;
+    border:1px;
+}
+.topul{
+    margin-left:-7%;
+}

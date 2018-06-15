@@ -2,6 +2,7 @@ package kr.ac.jejunu.exchange;
 
 
 import kr.ac.jejunu.exchange.Model.Basket;
+import kr.ac.jejunu.exchange.Model.Product;
 import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,7 @@ public class BasketTest {
 
         Basket basket = restTemplate.getForObject(PATH+"/"+ basketId, Basket.class);
         assertThat(basket.getBasketId(), is(basketId));
-        assertThat(basket.getUserId(), is(userId));
+        assertThat(basket.getUsername(), is(userId));
         assertThat(basket.getProductId(), is(productId));
     }
     @Test
@@ -41,7 +42,11 @@ public class BasketTest {
         List<Basket> baskets = restTemplate.getForObject(PATH +"/list", List.class);
         assertThat(baskets, not(IsEmptyCollection.empty()));
     }
-
+    @Test
+    public void listByUsername(){
+        List<Basket> products = restTemplate.getForObject(PATH+"/resistrationList", List.class);
+        assertThat(products, not(IsEmptyCollection.empty()));
+    }
     @Test
     public void create(){
         String userId = "user2";
@@ -56,7 +61,7 @@ public class BasketTest {
         Integer productId = 1;
         Basket createBasket = createBasket(userId, productId);
         validate(userId, productId,createBasket);
-        createBasket.setUserId("user5");
+        createBasket.setUsername("user5");
         restTemplate.put(PATH, createBasket);
         validate("user5", productId, createBasket);
 
@@ -70,20 +75,20 @@ public class BasketTest {
         validate(userId, productId,createBasket);
         restTemplate.delete(PATH+"/"+createBasket.getBasketId());
         Basket deleteBasket = restTemplate.getForObject(PATH +"/"+createBasket.getBasketId(), Basket.class);
-        assertThat(deleteBasket.getUserId(), is(nullValue()));
+        assertThat(deleteBasket.getUsername(), is(nullValue()));
     }
 
 
     private Basket createBasket(String userId, Integer productId) {
         Basket basket = new Basket();
-        basket.setUserId(userId);
+        basket.setUsername(userId);
         basket.setProductId(productId);
         return restTemplate.postForObject(PATH, basket, Basket.class);
     }
 
     private void validate(String userId, Integer productId, Basket createBasket) {
         Basket resultBasket = restTemplate.getForObject(PATH+"/"+createBasket.getBasketId(), Basket.class);
-        assertThat(resultBasket.getUserId(), is(userId));
+        assertThat(resultBasket.getUsername(), is(userId));
         assertThat(resultBasket.getProductId(), is(productId));
     }
 

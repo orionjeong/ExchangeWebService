@@ -1,0 +1,87 @@
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/init.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/join.css">
+
+    <title>Document</title>
+</head>
+<body>
+<div class="container-fluid">
+    <header class="head">
+        <h1 class="logo" >
+            <img src="/image/logo.png" alt="">
+        </h1>
+        <!-- 홈페이지 menu화면  -->
+        <nav class="menu">
+            <ul>
+                <li class="menu_item"><a href="">회원가입</a></li>
+                <li class="menu_item"><a href="">로그인</a></li>
+                <li class="menu_item"><a href="">상품등록</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+</div>
+<div id="join">
+    <h2>회원가입</h2><hr width="90%"/>
+    <div>
+        <table id="joinTable">
+            <tr>
+                <th>
+                    <label for="username">아이디</label>
+                </th>
+                <td>
+                    <input type="text" name="username" id="username" size="20%">
+                    *영문소문자/숫자, 4~16자
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <label for="password">비밀번호</label>
+                </th>
+                <td>
+                    <input type="password" name="password" id="password" size="20%">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="name">이름</label>
+                </th>
+                <td>
+                    <input type="text" name="name" id="name" size="20%">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="email">이메일</label>
+                </th>
+                <td>
+                    <input type="text" name="email" id="email" size="30%">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="phone">연락처</label>
+                </th>
+                <td>
+                    <input type="text" name="phone" id="phone" size="10%">
+                </td>
+            </tr>
+
+        </table>
+        <div id="Btn">
+            <input type="button" id="joinBtn" value="회원가입">
+            <input type="button" id="cancle" value="취소하기" onclick=window.location='../login'>
+        </div>
+    </div>
+
+</div>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/join.js"></script>`
+</body>
+</html>

@@ -15,7 +15,7 @@ public class Thumbup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer thumbupId;
-    String userId;
+    String username;
     Integer productId;
 
 }

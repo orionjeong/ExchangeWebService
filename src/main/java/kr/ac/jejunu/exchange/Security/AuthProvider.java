@@ -23,8 +23,6 @@ public class AuthProvider implements AuthenticationProvider{
         String id = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-
-
          try{
              authentication=  userService.login(id, password);
          } catch (SQLException e) {

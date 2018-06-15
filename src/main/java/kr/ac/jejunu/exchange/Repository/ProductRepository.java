@@ -11,4 +11,6 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Page<Product> findAllByCategoryLike(String category, Pageable pageable);
+    List<Product> findAllByProvider(String provider);
+
 }

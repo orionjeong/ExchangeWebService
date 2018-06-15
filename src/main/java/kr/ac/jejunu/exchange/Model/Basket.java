@@ -13,6 +13,6 @@ public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int basketId;
-    String userId;
+    String username;
     int productId;
 }

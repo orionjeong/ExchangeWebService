@@ -1,9 +1,8 @@
 package kr.ac.jejunu.exchange;
 
+import kr.ac.jejunu.exchange.Model.Product;
 import kr.ac.jejunu.exchange.Model.Thumbup;
-import org.hamcrest.collection.IsCollectionWithSize;
 import org.hamcrest.collection.IsEmptyCollection;
-import org.hibernate.validator.constraints.br.TituloEleitoral;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class ThumbupTest {
         Thumbup thumbup =restTemplate.getForObject(PATH+"/"+thumbId, Thumbup.class);
 
         assertThat(thumbup.getThumbupId(), is(thumbId));
-        assertThat(thumbup.getUserId(), is(userId));
+        assertThat(thumbup.getUsername(), is(userId));
         assertThat(thumbup.getProductId(), is(productId));
     }
 
@@ -40,6 +39,12 @@ public class ThumbupTest {
     public void list(){
         List<Thumbup> thumbups = restTemplate.getForObject(PATH+"/list", List.class);
         assertThat(thumbups, not(IsEmptyCollection.empty()));
+    }
+    //user를 서버에서 넣기 때문에 인증안됬을 경우 anonymousUser를 가져오므로 이를  db에 넣고 test
+    @Test
+    public void listByUsername(){
+        List<Product> products = restTemplate.getForObject(PATH+"/resistrationList", List.class);
+        assertThat(products, not(IsEmptyCollection.empty()));
     }
 
     @Test
@@ -57,7 +62,7 @@ public class ThumbupTest {
         Integer productId=2;
         Thumbup createThumbup = createThumbup(userId, productId);
         validate(userId,productId,createThumbup);
-        createThumbup.setUserId("user5");
+        createThumbup.setUsername("user5");
         restTemplate.put(PATH, createThumbup);
         validate("user5", productId, createThumbup);
     }
@@ -71,19 +76,19 @@ public class ThumbupTest {
         restTemplate.delete(PATH+"/"+createThumbup.getThumbupId());
 
         Thumbup deleteThumbup = restTemplate.getForObject(PATH+"/"+createThumbup.getThumbupId(),Thumbup.class);
-        assertThat(deleteThumbup.getUserId(), is(nullValue()));
+        assertThat(deleteThumbup.getUsername(), is(nullValue()));
     }
 
     private Thumbup createThumbup(String userId, Integer productId) {
         Thumbup thumbup = new Thumbup();
         thumbup.setProductId(productId);
-        thumbup.setUserId(userId);
+        thumbup.setUsername(userId);
         return restTemplate.postForObject(PATH, thumbup, Thumbup.class);
     }
 
     private void validate(String userId, Integer productId, Thumbup createThumbup) {
         Thumbup resultThumbup=restTemplate.getForObject(PATH+"/"+createThumbup.getThumbupId(), Thumbup.class);
-        assertThat(resultThumbup.getUserId(), is(userId));
+        assertThat(resultThumbup.getUsername(), is(userId));
         assertThat(resultThumbup.getProductId(), is(productId));
     }
 }
